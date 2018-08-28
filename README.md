@@ -14,6 +14,8 @@ https://tools.wmflabs.org/wembedder/api/vector/Q42
 
 https://github.com/fnielsen/wembedder/blob/master/wembedder/app/views.py
 
+https://radimrehurek.com/gensim/models/word2vec.html
+
 ## 3 DoSeR
 
 https://github.com/quhfus/DoSeR
