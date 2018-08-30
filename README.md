@@ -12,6 +12,12 @@ surface = pickle.load(open("surfaceForms-20180820.pickle", "rb"))
 ps ax | grep indexWdSurfaceServer.py
 ./background.sh
 
+
+
+sudo nohup /home/yann/wikidata/ml-phd-scripts_wikidata/indexes/virtualenv/bin/python indexWdSurfaceServer.py &
+
+
+
 ## 2 Embeddings
 The trained model was taken from wembedder (https://github.com/fnielsen/wembedder)
 The model used is  https://zenodo.org/record/823195

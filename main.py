@@ -6,10 +6,6 @@ import re
 from string import digits
 import networkx
 import itertools
-from networkx.exception import NetworkXError
-from networkx.utils import accumulate
-from networkx.utils import nodes_or_number
-from networkx.utils import pairwise
 
 # Main file for PoC pipeline
 
@@ -101,10 +97,14 @@ with open('data/webtables/countries.csv', "rt", encoding='utf-8') as csvfile:
             cells.append(cell)
         rows.append(cells)
 
+print("Original csv table")
+print(rows)
+
 # ------- Step 2: Normalize cells --------------------------------------------------------------------------------------
 # Step 1: Jump over first row if it is header (TODO header not always present, or more than a single row)
 # Step 2: Convert to lowercase & remove non alpha numeric characters
 # Example: "8 o'clock" to "o clock", "cat & Dog" to "cat dog"
+
 
 normalized = []
 for row in rows[1:]:
@@ -160,8 +160,9 @@ for row in normalized:
                 no_surface_found_count += 1
 
     candidates.append(candidate_row)
-
+print("Entities found in surface form:")
 print(candidates)
+print("Number of entities where no matching entitiy found:")
 print(no_surface_found_count)
 
 # ------- Step 4: Only keep candidates fow which we have embeddings ----------------------------------------------------
@@ -185,8 +186,11 @@ for row in candidates:
             candidate_row.append((sf, cell_candidates))
     final_candidates.append(candidate_row)
 
+print("Final candidates:")
 print(final_candidates)
+print("Number of entities where embedding found:")
 print(embedding_found_count)
+print("Number of entities where no embedding found:")
 print(no_embedding_found_count)
 # Note: at the moment not many embeddings are found, but I suspect it is because surface form index returns pretty
 #       random entities and not in a good order, final surface form index will be better !
@@ -198,7 +202,7 @@ for row in final_candidates:
         subsets.append(candidates)
 
 G = complete_multipartite_graph_with_weights(subsets)
-print([G.nodes[u]['subset'] for u in G])
+print("Nodes in the graph:")
 print(G.nodes)
 # Normalize weights to represent transition probabilities
 
@@ -207,6 +211,7 @@ print(G.nodes)
 # FIXME add random jump when performing pagerank
 
 rank_dict = networkx.pagerank(G, alpha=0.85)
+print("Those are the assigned ranks by PageRank algorithm:")
 print(rank_dict)
 
 disambiguated_count = 0
@@ -225,6 +230,8 @@ for row in final_candidates:
 
     disambiguated.append(disambiguated_row)
 
+print("Disambiguated entities by row:")
 print(disambiguated)
+print("Nodes disambiguated:")
 print(disambiguated_count)
 
