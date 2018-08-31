@@ -24,6 +24,6 @@ https://github.com/fnielsen/wembedder/blob/master/wembedder/app/views.py
 https://radimrehurek.com/gensim/models/word2vec.html
 
 ## 3 Other sources
-Main paper followed: https://scholar.google.ch/scholar?cluster=5238909793046189304&hl=en&as_sdt=0,5
+Main paper followed: https://scholar.google.ch/scholar?cluster=5238909793046189304&hl=en&as_sdt=0,5  
 DoSeR: https://github.com/quhfus/DoSeR
 
